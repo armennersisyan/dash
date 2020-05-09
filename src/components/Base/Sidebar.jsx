@@ -1,7 +1,9 @@
 import React from 'react';
 
 const Sidebar = () => (
-  <div>Sidebar</div>
+  <sidebar>
+    hello
+  </sidebar>
 );
 
 export default React.memo(Sidebar);

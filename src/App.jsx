@@ -1,14 +1,15 @@
 import React from 'react';
-import Sidebar from './components/Base/Sidebar';
+import { Router } from 'react-router-dom';
+import Routes from './services/routes';
+import history from './services/routes/history';
+import GlobalStyles from './styles/global';
 
 function App() {
-  const x = 'a';
   return (
-    <div className="App">
-      {x}
-      Hey
-      <Sidebar />
-    </div>
+    <Router history={history}>
+      <Routes />
+      <GlobalStyles />
+    </Router>
   );
 }
 

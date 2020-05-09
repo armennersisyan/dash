@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
 import DefaultLayout from '../../layouts/Default';
 import AuthLayout from '../../layouts/Auth';
 
 export default function RouteWrapper({ component: Component, isPrivate }) {
-  const signed = false;
+  const signed = useSelector((state) => state.auth.token);
 
   /**
    * Redirect user to Login page if he tries to access a private route

@@ -1,11 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../store/actions';
 import { Wrapper, Header } from './styles';
 
 function AuthLayout({ children }) {
+  const dispatch = useDispatch();
+
+  function handleLogout() {
+    dispatch(logout());
+  }
+
   return (
     <>
-      <Header />
+      <Header>
+        <button type="button" onClick={handleLogout}>Logout</button>
+      </Header>
       <Wrapper>
         {children}
       </Wrapper>

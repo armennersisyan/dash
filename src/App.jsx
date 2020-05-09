@@ -1,12 +1,13 @@
 import React from 'react';
+import Sidebar from './components/Base/Sidebar';
 
 function App() {
-  var x="a"
+  const x = 'a';
   return (
     <div className="App">
-      Hey
       {x}
-      asdasdasd
+      Hey
+      <Sidebar />
     </div>
   );
 }

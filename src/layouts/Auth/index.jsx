@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../store/actions';
+import { logoutUserSuccess } from '../../store/actions';
 import { Wrapper, Header } from './styles';
 
 function AuthLayout({ children }) {
   const dispatch = useDispatch();
 
   function handleLogout() {
-    dispatch(logout());
+    dispatch(logoutUserSuccess());
   }
 
   return (

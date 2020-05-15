@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../../../store/actions';
+import { Link } from 'react-router-dom';
+import { loginUserRequest } from '../../../store/actions';
 import Theme from '../../../styles/ThemeProvider';
 import {
   Wrapper,
@@ -10,7 +11,8 @@ import {
   SubTitle,
   Input,
   SubmitButton,
-} from './styles';
+  ActionWrapper,
+} from '../styles';
 
 const icon = require('./assets/icon.png');
 
@@ -29,12 +31,10 @@ function Login() {
   function handleSubmit(e) {
     e.preventDefault();
     const payload = {
-      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
       email,
       password,
     };
-    dispatch(login(payload));
-    return payload;
+    dispatch(loginUserRequest(payload));
   }
 
   return (
@@ -44,7 +44,7 @@ function Login() {
           <LogoWrapper>
             <img src={icon} alt="" />
           </LogoWrapper>
-          <Title>Let&apos;s get Started with Hey</Title>
+          <Title>Login to your Hey account</Title>
           <SubTitle>Sign up on Hey today & start sharing your thoughts freely</SubTitle>
           <form onSubmit={handleSubmit}>
             <Input
@@ -61,6 +61,12 @@ function Login() {
             />
             <SubmitButton type="submit">Sign in</SubmitButton>
           </form>
+          <ActionWrapper>
+            <p>
+              Don&apos;t have an account yet ?&nbsp;
+              <Link to="/register">Register</Link>
+            </p>
+          </ActionWrapper>
         </FormWrapper>
       </Wrapper>
     </Theme>

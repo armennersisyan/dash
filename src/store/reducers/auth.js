@@ -1,19 +1,20 @@
-import { LOGIN, LOGOUT } from '../actions';
-
 const initialState = {
-  token: localStorage.getItem('token'),
+  token: null,
   user: null,
 };
 
 function loginReducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN:
+    case 'LOGIN':
       return {
         ...state,
-        token: action.payload.token,
-        user: action.payload,
+        token: action.payload.user.refreshToken,
+        user: {
+          uid: action.payload.user.uid,
+          email: action.payload.user.email,
+        },
       };
-    case LOGOUT:
+    case 'LOGOUT':
       return {
         ...state,
         token: null,

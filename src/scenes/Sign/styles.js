@@ -78,3 +78,17 @@ export const SubmitButton = styled.button`
     background: ${(props) => props.theme.colors.inverse};
   }
 `;
+
+export const ActionWrapper = styled.div`
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 30px;
+  p {
+    color: ${(props) => props.theme.colors.darkGray};
+  }
+  a {
+    color: ${(props) => props.theme.colors.dark};
+    margin-top: 10px;
+  }
+`;

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { loginUserRequest } from '../../../store/actions';
 import Theme from '../../../styles/ThemeProvider';
 import {
@@ -18,21 +19,14 @@ const icon = require('./assets/icon.png');
 
 function Login() {
   const dispatch = useDispatch();
+  const {
+    register, handleSubmit, errors,
+  } = useForm();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  function handleEmailChange(e) {
-    setEmail(e.target.value);
-  }
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
-  function handleSubmit(e) {
-    e.preventDefault();
+  function onSubmit(values) {
     const payload = {
-      email,
-      password,
+      email: values.email,
+      password: values.password,
     };
     dispatch(loginUserRequest(payload));
   }
@@ -46,19 +40,22 @@ function Login() {
           </LogoWrapper>
           <Title>Login to your Hey account</Title>
           <SubTitle>Sign up on Hey today & start sharing your thoughts freely</SubTitle>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Input
               type="text"
+              name="email"
+              ref={register({ required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i })}
               placeholder="Email address"
-              value={email}
-              onChange={handleEmailChange}
             />
+            {errors && errors.email && errors.email.type === 'required' && 'Email is required'}
+            {errors && errors.email && errors.email.type === 'pattern' && 'Invalid Email address'}
             <Input
               type="password"
+              name="password"
+              ref={register({ required: true })}
               placeholder="Password"
-              value={password}
-              onChange={handlePasswordChange}
             />
+            {errors.password && 'Password field is required'}
             <SubmitButton type="submit">Sign in</SubmitButton>
           </form>
           <ActionWrapper>

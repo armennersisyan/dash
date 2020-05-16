@@ -6,6 +6,7 @@ const theme = {
     gray: '#9E9CAE',
     darkGray: '#747476',
     dark: '#100E17',
+    error: '#CD201D',
   },
 };
 

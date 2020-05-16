@@ -1,8 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { loginUserRequest } from '../../../store/actions';
+import Error from '../../../components/UI/Error';
 import Theme from '../../../styles/ThemeProvider';
 import {
   Wrapper,
@@ -19,16 +20,21 @@ const icon = require('./assets/icon.png');
 
 function Login() {
   const dispatch = useDispatch();
+  const { isPending } = useSelector((state) => state.auth);
   const {
-    register, handleSubmit, errors,
+    register, handleSubmit, setValue, errors,
   } = useForm();
 
-  function onSubmit(values) {
+  async function onSubmit(values) {
     const payload = {
       email: values.email,
       password: values.password,
     };
-    dispatch(loginUserRequest(payload));
+    await dispatch(loginUserRequest(payload)).then((res) => {
+      if (!res.operationType) {
+        setValue('password', null);
+      }
+    });
   }
 
   return (
@@ -44,19 +50,24 @@ function Login() {
             <Input
               type="text"
               name="email"
+              hasError={errors && errors.email}
               ref={register({ required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i })}
               placeholder="Email address"
             />
-            {errors && errors.email && errors.email.type === 'required' && 'Email is required'}
-            {errors && errors.email && errors.email.type === 'pattern' && 'Invalid Email address'}
+            <Error error={errors && errors.email}>
+              {errors && errors.email && errors.email.type === 'required' ? 'Email is required' : 'Invalid Email address'}
+            </Error>
             <Input
               type="password"
               name="password"
+              hasError={errors && errors.password}
               ref={register({ required: true })}
               placeholder="Password"
             />
-            {errors.password && 'Password field is required'}
-            <SubmitButton type="submit">Sign in</SubmitButton>
+            <Error error={errors && errors.password}>
+              Password field is required
+            </Error>
+            <SubmitButton type="submit" disabled={isPending}>Sign in</SubmitButton>
           </form>
           <ActionWrapper>
             <p>

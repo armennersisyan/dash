@@ -1,6 +1,7 @@
 const initialState = {
   token: null,
   user: null,
+  isPending: false,
 };
 
 function loginReducer(state = initialState, action) {
@@ -19,6 +20,11 @@ function loginReducer(state = initialState, action) {
         ...state,
         token: null,
         user: null,
+      };
+    case 'PENDING':
+      return {
+        ...state,
+        isPending: action.status,
       };
     default:
       return initialState;

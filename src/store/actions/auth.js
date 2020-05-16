@@ -8,6 +8,13 @@ export function loginUserSuccess(payload) {
   };
 }
 
+export function loginUserPending(status) {
+  return {
+    type: 'PENDING',
+    status,
+  };
+}
+
 export function logoutUserSuccess(payload) {
   localStorage.removeItem('token');
   return {
@@ -33,6 +40,7 @@ export function registerUserRequest(payload) {
 
 export function loginUserRequest(payload) {
   return async function action(dispatch) {
+    dispatch(loginUserPending(true));
     let response;
     try {
       response = await firebase
@@ -40,8 +48,9 @@ export function loginUserRequest(payload) {
         .signInWithEmailAndPassword(payload.email, payload.password);
       dispatch(loginUserSuccess(response));
     } catch (error) {
-      return error;
+      response = error;
     }
+    dispatch(loginUserPending(false));
     return response;
   };
 }

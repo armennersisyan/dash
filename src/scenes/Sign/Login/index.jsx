@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { loginUserRequest } from '../../../store/actions';
+import { loginUserRequest, signUserGoogleRequest } from '../../../store/actions';
 import Error from '../../../components/UI/Error';
 import Theme from '../../../styles/ThemeProvider';
 import {
@@ -13,10 +13,12 @@ import {
   SubTitle,
   Input,
   SubmitButton,
+  GoogleSignButton,
   ActionWrapper,
 } from '../styles';
 
 const icon = require('./assets/icon.png');
+const googleIcon = require('../assets/google.svg');
 
 function Login() {
   const dispatch = useDispatch();
@@ -24,6 +26,10 @@ function Login() {
   const {
     register, handleSubmit, setValue, errors,
   } = useForm();
+
+  function handleGoogleSignIn() {
+    dispatch(signUserGoogleRequest());
+  }
 
   async function onSubmit(values) {
     const payload = {
@@ -46,6 +52,11 @@ function Login() {
           </LogoWrapper>
           <Title>Login to your Hey account</Title>
           <SubTitle>Sign up on Hey today & start sharing your thoughts freely</SubTitle>
+          <GoogleSignButton type="button" onClick={handleGoogleSignIn}>
+            <img src={googleIcon} alt="google" />
+            Sign In with Google
+          </GoogleSignButton>
+          <p className="separator">Or Sign up with Email</p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Input
               type="text"

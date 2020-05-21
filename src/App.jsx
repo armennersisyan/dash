@@ -13,9 +13,9 @@ function App() {
   /**
    * Check if token exists in localStorage and dispatch to store
    */
-  const token = localStorage.getItem('token');
-  if (token !== null) {
-    dispatch(loginUserSuccess({ user: { refreshToken: token } }));
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (user !== null) {
+    dispatch(loginUserSuccess({ user }));
   }
 
   return (

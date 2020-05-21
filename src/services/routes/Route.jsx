@@ -7,7 +7,7 @@ import DefaultLayout from '../../layouts/Default';
 import AuthLayout from '../../layouts/Auth';
 
 export default function RouteWrapper({ component: Component, isPrivate }) {
-  const signed = useSelector((state) => state.auth && state.auth.token);
+  const signed = useSelector((state) => state.auth && state.auth.user);
 
   /**
    * Redirect user to Login page if he tries to access a private route

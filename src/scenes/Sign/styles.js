@@ -8,6 +8,13 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  .separator {
+    color: ${(props) => props.theme.colors.gray};
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    margin: 25px 0 20px 0;
+  }
 `;
 
 export const FormWrapper = styled.div`
@@ -75,6 +82,30 @@ export const SubmitButton = styled.button`
   transition: 0.3s;
   &:hover {
     background: ${(props) => props.theme.colors.inverse};
+  }
+`;
+
+export const GoogleSignButton = styled.button`
+  color: ${(props) => props.theme.colors.dark};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #eee;
+  line-height: 1;
+  width: 100%;
+  height: 48px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 7.5px;
+  transition: 0.3s;
+  &:hover {
+    background: #e5e5e5;
+  }
+  img {
+    width: 22px;
+    margin-right: 12px;
   }
 `;
 

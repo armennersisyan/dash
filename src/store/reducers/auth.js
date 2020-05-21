@@ -1,5 +1,4 @@
 const initialState = {
-  token: null,
   user: null,
   isPending: false,
 };
@@ -9,7 +8,6 @@ function loginReducer(state = initialState, action) {
     case 'LOGIN':
       return {
         ...state,
-        token: action.payload.user.refreshToken,
         user: {
           uid: action.payload.user.uid,
           email: action.payload.user.email,
@@ -18,7 +16,6 @@ function loginReducer(state = initialState, action) {
     case 'LOGOUT':
       return {
         ...state,
-        token: null,
         user: null,
       };
     case 'PENDING':

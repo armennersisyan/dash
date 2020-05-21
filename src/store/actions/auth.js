@@ -1,7 +1,8 @@
+import * as firebaseAPI from 'firebase';
 import firebase from '../../services/firebase';
 
 export function loginUserSuccess(payload) {
-  localStorage.setItem('token', payload.user.refreshToken);
+  localStorage.setItem('user', JSON.stringify(payload.user));
   return {
     type: 'LOGIN',
     payload,
@@ -16,7 +17,7 @@ export function loginUserPending(status) {
 }
 
 export function logoutUserSuccess(payload) {
-  localStorage.removeItem('token');
+  localStorage.removeItem('user');
   return {
     type: 'LOGOUT',
     payload,
@@ -33,6 +34,22 @@ export function registerUserRequest(payload) {
       dispatch(loginUserSuccess(response));
     } catch (error) {
       return error;
+    }
+    return response;
+  };
+}
+
+export function signUserGoogleRequest() {
+  return async function action(dispatch) {
+    let response;
+    try {
+      const provider = new firebaseAPI.auth.GoogleAuthProvider();
+      response = await firebaseAPI
+        .auth()
+        .signInWithPopup(provider);
+      dispatch(loginUserSuccess(response));
+    } catch (error) {
+      response = error;
     }
     return response;
   };

@@ -16,8 +16,8 @@ function Error({ error, children }) {
   };
 
   const transitionStyles = {
-    entering: { opacity: 0 },
-    entered: { opacity: 1 },
+    entering: { opacity: 0, transform: 'translateY(-10px)' },
+    entered: { opacity: 1, transform: 'translateY(0)' },
     exiting: { opacity: 0 },
     exited: { opacity: 0 },
   };

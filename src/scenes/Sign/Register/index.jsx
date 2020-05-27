@@ -33,6 +33,7 @@ function Register() {
 
   async function onSubmit(values) {
     const payload = {
+      displayName: values.name,
       email: values.email,
       password: values.password,
     };
@@ -58,6 +59,16 @@ function Register() {
           </GoogleSignButton>
           <p className="separator">Or Sign up with Email</p>
           <form onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              type="text"
+              name="name"
+              hasError={errors && errors.name}
+              ref={register({ required: true })}
+              placeholder="Full Name"
+            />
+            <Error error={errors && errors.name}>
+              Name Field field is required
+            </Error>
             <Input
               type="text"
               name="email"

@@ -15,4 +15,4 @@ DefaultLayout.propTypes = {
 };
 
 
-export default DefaultLayout;
+export default React.memo(DefaultLayout);

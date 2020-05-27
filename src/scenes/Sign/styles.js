@@ -80,8 +80,12 @@ export const SubmitButton = styled.button`
   text-align: center;
   margin-top: 7.5px;
   transition: 0.3s;
-  &:hover {
+  &:hover:not(:disabled) {
     background: ${(props) => props.theme.colors.inverse};
+  }
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
   }
 `;
 
